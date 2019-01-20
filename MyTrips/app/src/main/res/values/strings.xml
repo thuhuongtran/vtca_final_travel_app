@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">My Trips</string>
+    <string name="app_slogan_begin">Create your</string>
+    <string name="app_slogan_end"> beautiful memories</string>
+    <string name="error_sign_in_email">This email address is not available. Please choose a different address</string>
+    <string name="error_sign_in_password">Wrong password. Please try again.</string>
+    <string name="label_activity_forgot_password">Forgot your password? We will send you a code to your email. Please confirm your email below.</string>
+    <string name="welcome_introduce_begin">Write about your own experience</string>
+    <string name="welcome_introduce_end">Record your adventures with beautiful photos, time lines ans more.</string>
+    <string name="main_travel_introduce_line1">Ready for your new story</string>
+    <string name="main_travel_introduce_line2">Tab the + button to start.</string>
+    <string name="warn_empty_travel_title">Travel title is empty</string>
+    <string name="warn_empty_travel_place">City is empty</string>
+    <string name="title_activity_maps">Maps</string>
+    <string name="warn_empty_end_date">End date is empty</string>
+</resources>
