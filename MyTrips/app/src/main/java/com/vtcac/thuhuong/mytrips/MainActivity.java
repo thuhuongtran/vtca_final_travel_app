@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MainActivity extends BaseActivity implements View.OnClickListener{
     private static final String TAG = MainActivity.class.getSimpleName();
     private RecyclerView recyclerView;
-    private ImageView ivMenu;
+    private ImageView ivMoreVert;
     private RelativeLayout rlIntroduce;
     private TravelListAdapter travelsAdapter;
     private TravelViewModel travelsViewModel;
@@ -58,8 +58,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
         });
         rlIntroduce = findViewById(R.id.rlMainTravelIntroduce);
-        ivMenu = findViewById(R.id.ivMenu);
-        ivMenu.setOnClickListener(this);
+        ivMoreVert = findViewById(R.id.ivMenu);
 
         travelsAdapter = new TravelListAdapter(this);
         recyclerView = findViewById(R.id.recyclerView);
