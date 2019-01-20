@@ -45,22 +45,35 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:paddingLeft="@dimen/padding_left_list_item_text"
-            android:singleLine="true"
             android:paddingRight="16dp"
+            android:singleLine="true"
             tools:text="Place address" />
+
         <TextView
             android:id="@+id/tvTravelDateTime"
+            style="@style/TextAppearance.AppCompat.Widget.DropDownItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvTravelPlaceAddr"
-            style="@style/TextAppearance.Compat.Notification.Time"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:paddingLeft="@dimen/padding_left_list_item_text"
-            android:singleLine="true"
             android:paddingRight="16dp"
+            android:singleLine="true"
             tools:text="travel date time start-end" />
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_more_vert"
+        android:paddingRight="8dp"
+        android:tint="@color/colorLabelTextCommon"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="0dp"

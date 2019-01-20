@@ -23,4 +23,5 @@
     <color name="colorError">#d20b0b</color>
     <color name="colorLogoOrange">#d7782b</color>
     <color name="colorLine">#9c9b9b</color>
+    <color name="colorViewOnClick">#f4f4f4</color>
 </resources>

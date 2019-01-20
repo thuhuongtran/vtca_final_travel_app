@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,9 +23,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener{
     private static final String TAG = MainActivity.class.getSimpleName();
     private RecyclerView recyclerView;
+    private ImageView ivMenu;
     private RelativeLayout rlIntroduce;
     private TravelListAdapter travelsAdapter;
     private TravelViewModel travelsViewModel;
@@ -56,6 +58,8 @@ public class MainActivity extends BaseActivity {
             }
         });
         rlIntroduce = findViewById(R.id.rlMainTravelIntroduce);
+        ivMenu = findViewById(R.id.ivMenu);
+        ivMenu.setOnClickListener(this);
 
         travelsAdapter = new TravelListAdapter(this);
         recyclerView = findViewById(R.id.recyclerView);
@@ -75,5 +79,10 @@ public class MainActivity extends BaseActivity {
         switch (requestCode){
 
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
