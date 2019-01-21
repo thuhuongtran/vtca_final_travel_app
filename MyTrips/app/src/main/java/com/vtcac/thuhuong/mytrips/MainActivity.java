@@ -1,11 +1,17 @@
 package com.vtcac.thuhuong.mytrips;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.vtcac.thuhuong.mytrips.adapter.TravelListAdapter;
@@ -23,11 +29,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     private RecyclerView recyclerView;
-    private ImageView ivMoreVert;
     private RelativeLayout rlIntroduce;
+    private ImageView ivSearch;
+
     private TravelListAdapter travelsAdapter;
     private TravelViewModel travelsViewModel;
     private final Observer<List<Travel>> travelsObserver = new Observer<List<Travel>>() {
@@ -54,11 +61,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(MainActivity.this, EditTravelActivity.class)
-                ,MyConst.REQ_EDIT_TRAVEL);
+                        , MyConst.REQCD_EDIT_TRAVEL);
             }
         });
         rlIntroduce = findViewById(R.id.rlMainTravelIntroduce);
-        ivMoreVert = findViewById(R.id.ivMenu);
+        ivSearch = findViewById(R.id.ivSearch);
+        // search
+        ivSearch.setOnClickListener(this);
 
         travelsAdapter = new TravelListAdapter(this);
         recyclerView = findViewById(R.id.recyclerView);
@@ -74,14 +83,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         Log.d(TAG, "onActivityResult: requestCode=" + requestCode);
         Log.d(TAG, "onActivityResult: resultCode=" + resultCode);
         Log.d(TAG, "onActivityResult: data=" + data);
-        if(resultCode!=RESULT_OK) return;
-        switch (requestCode){
+        if (resultCode != RESULT_OK) return;
+        switch (requestCode) {
 
         }
     }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.ivSearch:
+                startActivityForResult(new Intent(this, SearchableActivity.class)
+                        , MyConst.REQCD_SEARCH_TRAVELS_BY_CITY);
+                break;
+        }
     }
+
 }

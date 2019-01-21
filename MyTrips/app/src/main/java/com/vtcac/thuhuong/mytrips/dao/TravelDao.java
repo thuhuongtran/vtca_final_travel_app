@@ -26,6 +26,9 @@ public interface TravelDao {
     @Query("SELECT * FROM travel ORDER BY endDt DESC")
     LiveData<List<Travel>> getAllTravelsByEndDesc();
 
+    @Query("SELECT * FROM travel WHERE placeName LIKE :placeName")
+    LiveData<List<Travel>> getAllTravelsByTypingCity(String placeName);
+
     @Insert
     void insertTravel(Travel... travels);
 

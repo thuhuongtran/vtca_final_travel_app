@@ -21,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginVertical="@dimen/margin_vertical_list_item"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivMenu"
         app:layout_constraintStart_toEndOf="@id/ivTravelImg"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -33,7 +33,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:paddingLeft="@dimen/padding_left_list_item_text"
-            android:paddingRight="16dp"
+            android:paddingRight="@dimen/margin_normal_8"
             android:singleLine="true"
             tools:text="Travel Title" />
 
@@ -45,9 +45,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:paddingLeft="@dimen/padding_left_list_item_text"
-            android:paddingRight="16dp"
+            android:paddingRight="@dimen/margin_normal_8"
             android:singleLine="true"
-            tools:text="Place address" />
+            tools:text="Place address ahahahhahaha hahah hahahahaha" />
 
         <TextView
             android:id="@+id/tvTravelDateTime"
@@ -58,7 +58,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:paddingLeft="@dimen/padding_left_list_item_text"
-            android:paddingRight="16dp"
+            android:paddingRight="@dimen/margin_normal_8"
             android:singleLine="true"
             tools:text="travel date time start-end" />
     </RelativeLayout>
@@ -68,6 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:paddingRight="8dp"
+        android:paddingLeft="8dp"
         android:src="@drawable/ic_more_vert"
         android:background="@drawable/bg_view_onclick"
         android:tint="@color/colorLabelTextCommon"

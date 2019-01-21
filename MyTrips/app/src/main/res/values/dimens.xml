@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_normal_16">16dp</dimen>
+    <dimen name="margin_normal_8">8dp</dimen>
     <dimen name="text_edit_size">14sp</dimen>
     <dimen name="label_text_content">12sp</dimen>
     <dimen name="button_floating">50dp</dimen>
@@ -19,5 +20,6 @@
     <dimen name="margin_vertical_list_item">16dp</dimen>
     <dimen name="margin_vertical_list">8dp</dimen>
     <dimen name="padding_left_list_item_text">20dp</dimen>
+    <dimen name="width_height_square_image_search_list_item">40dp</dimen>
 
 </resources>

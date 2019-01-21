@@ -29,7 +29,7 @@
             android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
             android:layout_marginTop="23dp">
 
             <TextView
@@ -70,8 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/vlLine1"
-            android:layout_marginHorizontal="@dimen/margin_normal"
-            android:layout_marginTop="@dimen/margin_normal">
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
+            android:layout_marginTop="@dimen/margin_normal_16">
 
             <TextView
                 android:id="@+id/tvEndTitle"
@@ -108,8 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/vlLine"
-            android:layout_marginHorizontal="@dimen/margin_normal"
-            android:layout_marginTop="@dimen/margin_normal">
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
+            android:layout_marginTop="@dimen/margin_normal_16">
 
             <TextView
                 android:id="@+id/tvSelectPlace"
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll3"
             android:layout_marginTop="28dp"
-            android:layout_marginHorizontal="@dimen/margin_normal">
+            android:layout_marginHorizontal="@dimen/margin_normal_16">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etTravelTitle"
@@ -156,7 +156,7 @@
             android:layout_below="@id/tilEtTitle"
             android:layout_alignParentRight="true"
             android:layout_marginTop="28dp"
-            android:layout_marginHorizontal="@dimen/margin_normal"
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
             android:text="Add" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

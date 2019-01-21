@@ -26,6 +26,11 @@ public class TravelViewModel extends AndroidViewModel {
         return travelRepo.getAllTravelsByEndDesc();
     }
 
+    // for search activity
+    public LiveData<List<Travel>> getAllTravelsByTypingCity(String placeName) {
+        return travelRepo.getAllTravelsByTypingCity(placeName);
+    }
+
     public void insertTravel(Travel travel) {
         travelRepo.insertTravel(travel);
     }

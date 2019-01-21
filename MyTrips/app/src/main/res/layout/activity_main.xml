@@ -13,11 +13,11 @@
         android:background="@color/colorPrimary"
         app:title="@string/app_name"
         app:titleTextColor="@android:color/white" />
-
     <ImageView
         android:id="@+id/ivSearch"
         android:layout_width="wrap_content"
         android:layout_height="?android:attr/actionBarSize"
+        android:background="@drawable/bg_blue_view_onclick"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:src="@drawable/ic_search"
@@ -28,6 +28,7 @@
         android:id="@+id/ivMoreSort"
         android:layout_width="wrap_content"
         android:layout_height="?android:attr/actionBarSize"
+        android:background="@drawable/bg_blue_view_onclick"
         android:paddingLeft="8dp"
         android:paddingRight="16dp"
         android:src="@drawable/ic_more_vert"
@@ -93,8 +94,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_marginVertical="@dimen/margin_vertical_list"
         android:layout_height="0dp"
+        android:layout_marginVertical="@dimen/margin_vertical_list"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

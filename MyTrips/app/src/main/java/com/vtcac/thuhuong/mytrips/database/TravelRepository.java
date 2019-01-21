@@ -41,7 +41,10 @@ public class TravelRepository
     public LiveData<List<Travel>> getAllTravelsByEndDesc() {
         return travelDao.getAllTravelsByEndDesc();
     }
-
+    // for search activity
+    public LiveData<List<Travel>> getAllTravelsByTypingCity(String placeName) {
+        return travelDao.getAllTravelsByTypingCity(placeName);
+    }
     // insert
     public void insertTravel(Travel travel) {
         new insertAsyncTask(travelDao).execute(travel);
