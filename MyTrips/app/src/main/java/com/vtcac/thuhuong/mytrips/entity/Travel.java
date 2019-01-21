@@ -1,12 +1,16 @@
 package com.vtcac.thuhuong.mytrips.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "travel")
+@Fts4
 public class Travel extends TravelBaseEntity {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "rowid")
     private long id;
     private String endDt;
     private String imgUri;

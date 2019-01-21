@@ -16,17 +16,17 @@ public interface TravelDao {
      *
      * @return paged_list travels
      */
-    @Query("SELECT * FROM travel ORDER BY startDt DESC")
+    @Query("SELECT *,`rowid` FROM travel ORDER BY startDt DESC")
     LiveData<List<Travel>> getAllTravelsByStartDesc();
     /**
      * get travels sorted by newest end date
      *
      * @return paged_list travels
      */
-    @Query("SELECT * FROM travel ORDER BY endDt DESC")
+    @Query("SELECT *,`rowid` FROM travel ORDER BY endDt DESC")
     LiveData<List<Travel>> getAllTravelsByEndDesc();
 
-    @Query("SELECT * FROM travel WHERE placeName LIKE :placeName")
+    @Query("SELECT *,`rowid` FROM travel WHERE placeName MATCH :placeName")
     LiveData<List<Travel>> getAllTravelsByTypingCity(String placeName);
 
     @Insert

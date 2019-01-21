@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
     private RelativeLayout rlIntroduce;
     private ImageView ivSearch;
+    private ImageView ivMoreSort;
 
     private TravelListAdapter travelsAdapter;
     private TravelViewModel travelsViewModel;
@@ -69,6 +70,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         // search
         ivSearch.setOnClickListener(this);
 
+        // sort list of travel
+        ivMoreSort = findViewById(R.id.ivMoreSort);
+        ivMoreSort.setOnClickListener(this);
+
         travelsAdapter = new TravelListAdapter(this);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(travelsAdapter);
@@ -95,6 +100,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.ivSearch:
                 startActivityForResult(new Intent(this, SearchableActivity.class)
                         , MyConst.REQCD_SEARCH_TRAVELS_BY_CITY);
+                break;
+            case R.id.ivMoreSort:
+                // todo show spinner
+                // todo sort list
                 break;
         }
     }
