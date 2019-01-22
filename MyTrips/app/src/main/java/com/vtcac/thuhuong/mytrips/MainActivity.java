@@ -1,22 +1,23 @@
 package com.vtcac.thuhuong.mytrips;
 
-import android.app.SearchManager;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.vtcac.thuhuong.mytrips.adapter.TravelListAdapter;
 import com.vtcac.thuhuong.mytrips.base.BaseActivity;
+import com.vtcac.thuhuong.mytrips.base.ListItemClickListener;
+import com.vtcac.thuhuong.mytrips.base.MyApplication;
 import com.vtcac.thuhuong.mytrips.entity.Travel;
+import com.vtcac.thuhuong.mytrips.entity.TravelBaseEntity;
 import com.vtcac.thuhuong.mytrips.model.TravelViewModel;
 import com.vtcac.thuhuong.mytrips.utils.MyConst;
 
@@ -29,12 +30,14 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener
+        , ListItemClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     private RecyclerView recyclerView;
     private RelativeLayout rlIntroduce;
     private ImageView ivSearch;
     private ImageView ivMoreSort;
+    private int sortOption = 0;
 
     private TravelListAdapter travelsAdapter;
     private TravelViewModel travelsViewModel;
@@ -44,6 +47,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             Log.d(TAG, "onChanged: travels.size=" + travels.size());
             travelsAdapter.setTravelList(travels);
             if (travels.size() > 0) {
+                ((MyApplication) getApplication()).setTravelListSize(travels.size());
                 rlIntroduce.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
             }
@@ -57,12 +61,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Toolbar toolbar = findViewById(R.id.tbToolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(MainActivity.this, EditTravelActivity.class)
-                        , MyConst.REQCD_EDIT_TRAVEL);
+                                .putExtra(MyConst.AC_TRAVEL, MyConst.AC_ADD_TRAVEL)
+                        , MyConst.REQCD_ADD_TRAVEL);
             }
         });
         rlIntroduce = findViewById(R.id.rlMainTravelIntroduce);
@@ -75,11 +80,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ivMoreSort.setOnClickListener(this);
 
         travelsAdapter = new TravelListAdapter(this);
+        travelsAdapter.setListItemClickListener(this);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(travelsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         travelsViewModel = ViewModelProviders.of(this).get(TravelViewModel.class);
-        travelsViewModel.getAllTravelsByStartDesc().observe(this, travelsObserver);
+        travelsViewModel.getAllTravelsSorted(((MyApplication) getApplication()).getTravelSortOption())
+                .observe(this, travelsObserver);
     }
 
     @Override
@@ -102,10 +109,85 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         , MyConst.REQCD_SEARCH_TRAVELS_BY_CITY);
                 break;
             case R.id.ivMoreSort:
-                // todo show spinner
-                // todo sort list
+                onCreateDialog();
                 break;
         }
     }
 
+    /**
+     * show dialog sorting options
+     *
+     * @return
+     */
+    private void onCreateDialog() {
+        int checkedItem = ((MyApplication) getApplication()).getTravelSortOption();
+        Log.d(TAG, "onCreateDialog: checked-sort-option=" + checkedItem);
+        LayoutInflater inflater = getLayoutInflater();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCustomTitle(inflater.inflate(R.layout.dialog_title_sort_travel, null))
+                .setSingleChoiceItems(R.array.sort_options, checkedItem, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sortOption = which;
+                        Log.d(TAG, "onClick: which=" + sortOption);
+                    }
+                })
+                .setPositiveButton("ACCEPT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((MyApplication) getApplication()).setOptionSort(sortOption);
+                        travelsViewModel.getAllTravelsSorted(sortOption).observe(MainActivity.this
+                                , travelsObserver);
+                        Log.d(TAG, "onClick: which_button=" + which);
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        final Button positiveBtn = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        positiveBtn.setBackgroundColor(getResources().getColor(android.R.color.white));
+        positiveBtn.setTextColor(getResources().getColor(R.color.colorSecondary));
+    }
+
+    @Override
+    public void onListItemClick(View v, int position, TravelBaseEntity entity) {
+        return;
+    }
+
+    @Override
+    public void onMoreVertMenuItemClick(int viewId, int position, final TravelBaseEntity entity) {
+        switch (viewId) {
+            case R.id.mniEdit:
+                startActivityForResult(new Intent(this, EditTravelActivity.class)
+                                .putExtra(MyConst.AC_TRAVEL, MyConst.AC_EDIT_TRAVEL)
+                                .putExtra(MyConst.OBJ_TRAVEL, entity)
+                        , MyConst.REQCD_EDIT_TRAVEL);
+                break;
+            case R.id.mniDelete:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.title_dialog_delete_travel)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                travelsViewModel.deleteTravel((Travel) entity);
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // DO NOTHING
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                // set positive button background
+                final Button positiveBtn = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                positiveBtn.setBackgroundColor(getResources().getColor(android.R.color.white));
+                positiveBtn.setTextColor(getResources().getColor(R.color.colorSecondary));
+                final Button negativeBtn = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                // set negative button background
+                negativeBtn.setBackgroundColor(getResources().getColor(android.R.color.white));
+                negativeBtn.setTextColor(getResources().getColor(R.color.colorSecondary));
+                break;
+        }
+    }
 }

@@ -15,4 +15,10 @@
     <string name="warn_empty_travel_place">City is empty</string>
     <string name="title_activity_maps">Maps</string>
     <string name="warn_empty_end_date">End date is empty</string>
+    <string name="sort_options_title">Sort Options</string>
+    <string name="title_toolbar_edit_travel">Edit Travel</string>
+    <string name="title_toolbar_add_travel">New Travel</string>
+    <string name="button_txt_add">Add</string>
+    <string name="button_txt_edit">Change</string>
+    <string name="title_dialog_delete_travel">Are you sure want to delete this entry?</string>
 </resources>

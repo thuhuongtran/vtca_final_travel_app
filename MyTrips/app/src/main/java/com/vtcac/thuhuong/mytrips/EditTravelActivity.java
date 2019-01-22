@@ -18,7 +18,6 @@ import com.vtcac.thuhuong.mytrips.entity.Travel;
 import com.vtcac.thuhuong.mytrips.model.TravelViewModel;
 import com.vtcac.thuhuong.mytrips.utils.MyConst;
 import com.vtcac.thuhuong.mytrips.utils.MyDate;
-import com.vtcac.thuhuong.mytrips.utils.MyImage;
 import com.vtcac.thuhuong.mytrips.utils.MyString;
 
 import java.util.Calendar;
@@ -40,6 +39,7 @@ public class EditTravelActivity extends BaseActivity implements View.OnClickList
     private Button btnAdd;
     private Travel travel;
     private TravelViewModel travelViewModel;
+    private Intent receivedIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,40 @@ public class EditTravelActivity extends BaseActivity implements View.OnClickList
         travelStartDt = findViewById(R.id.tvStartDt);
         travelEndDt = findViewById(R.id.tvEndDt);
         btnAdd = findViewById(R.id.btnAddEdit);
+        // get type of action - add or edit
+        receivedIntent = getIntent();
+        switch (receivedIntent.getStringExtra(MyConst.AC_TRAVEL)) {
+            case MyConst.AC_ADD_TRAVEL:
+                toolbar.setTitle(R.string.title_toolbar_add_travel);
+                btnAdd.setText(R.string.button_txt_add);
+                break;
+            case MyConst.AC_EDIT_TRAVEL:
+                toolbar.setTitle(R.string.title_toolbar_edit_travel);
+                btnAdd.setText(R.string.button_txt_edit);
+                // set value to view
+                travel = (Travel) receivedIntent.getSerializableExtra(MyConst.OBJ_TRAVEL);
+                Log.d(TAG, "onCreate: travel = name:"+travel.getPlaceName());
+                if (travel == null) return;
 
+                if (!travel.getStartDt().equals("") && travel.getStartDt() != null)
+                    travelStartDt.setText(travel.getStartDt());
+                Log.d(TAG, "onCreate: travel-start="+travel.getStartDt());
+
+                if (!travel.getEndDt().equals("") && travel.getEndDt() != null)
+                    travelEndDt.setText(travel.getEndDt());
+                Log.d(TAG, "onCreate: travel-end="+travel.getEndDt());
+
+                if (!travel.getPlaceName().equals("") && travel.getPlaceName() != null) {
+                    travelPlace.setTextColor(getResources().getColor(R.color.colorSecondary));
+                    travelPlace.setText(travel.getPlaceName());
+                }
+
+                if (!travel.getTitle().equals("") && travel.getTitle() != null)
+                    travelTitle.setText(travel.getTitle());
+                Log.d(TAG, "onCreate: travel-title="+travel.getTitle());
+
+                break;
+        }
         travelPlace.setOnClickListener(this);
         travelStartDt.setOnClickListener(this);
         travelEndDt.setOnClickListener(this);
@@ -111,30 +144,57 @@ public class EditTravelActivity extends BaseActivity implements View.OnClickList
             Snackbar.make(travelTitle, R.string.warn_empty_travel_title, Snackbar.LENGTH_LONG).show();
             return;
         }
-        if (MyString.isEmpty(travelPlace.getText().toString())) {
-            Snackbar.make(travelTitle, R.string.warn_empty_travel_place, Snackbar.LENGTH_LONG).show();
-            return;
+        switch (receivedIntent.getStringExtra(MyConst.AC_TRAVEL)) {
+            case MyConst.AC_ADD_TRAVEL: {
+                if (MyString.isEmpty(travelPlace.getText().toString())) {
+                    Snackbar.make(travelTitle, R.string.warn_empty_travel_place, Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+                if (endTimestmp == 0) {
+                    Snackbar.make(travelTitle, R.string.warn_empty_end_date, Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+                // add a new travel
+                if (travel == null) {
+                    travel = new Travel(title);
+                } else {
+                    travel.setTitle(title);
+                }
+                if (travelPlace != null) {
+                    travel.setPlaceId(place.getId());
+                    travel.setPlaceName((String) place.getName());
+                    travel.setPlaceAddr((String) place.getAddress());
+                    travel.setPlaceLat(place.getLatLng().latitude);
+                    travel.setPlaceLng(place.getLatLng().longitude);
+                }
+                travel.setStartDt(MyDate.timestampToDate(startTimestmp));
+                travel.setEndDt(MyDate.timestampToDate(endTimestmp));
+                travelViewModel.insertTravel(travel);
+            }
+            break;
+            case MyConst.AC_EDIT_TRAVEL: {
+                Log.d(TAG, "validate before update: travel="+travel.getTitle()+" "+travel.getPlaceName()+" "+travel.getStartDt()
+                        +" "+travel.getEndDt());
+                travel.setTitle(travelTitle.getText().toString());
+                if (!travelPlace.getText().toString().equals(travel.getPlaceName())) {
+                    travel.setPlaceId(place.getId());
+                    travel.setPlaceName((String) place.getName());
+                    travel.setPlaceAddr((String) place.getAddress());
+                    travel.setPlaceLat(place.getLatLng().latitude);
+                    travel.setPlaceLng(place.getLatLng().longitude);
+                }
+                if (!travel.getStartDt().equals(MyDate.timestampToDate(startTimestmp))) {
+                    travel.setStartDt(MyDate.timestampToDate(startTimestmp));
+                }
+                if (!travel.getEndDt().equals(MyDate.timestampToDate(endTimestmp))) {
+                    travel.setEndDt(MyDate.timestampToDate(endTimestmp));
+                }
+                Log.d(TAG, "validate after update: travel="+travel.getTitle()+" "+travel.getPlaceName()+" "+travel.getStartDt()
+                +" "+travel.getEndDt());
+                travelViewModel.updateTravel(travel);
+            }
+            break;
         }
-        if (endTimestmp == 0) {
-            Snackbar.make(travelTitle, R.string.warn_empty_end_date, Snackbar.LENGTH_LONG).show();
-            return;
-        }
-        // add a new travel
-        if (travel == null) {
-            travel = new Travel(title);
-        } else {
-            travel.setTitle(title);
-        }
-        if (travelPlace != null) {
-            travel.setPlaceId(place.getId());
-            travel.setPlaceName((String) place.getName());
-            travel.setPlaceAddr((String) place.getAddress());
-            travel.setPlaceLat(place.getLatLng().latitude);
-            travel.setPlaceLng(place.getLatLng().longitude);
-        }
-        travel.setStartDt(MyDate.timestampToDate(startTimestmp));
-        travel.setEndDt(MyDate.timestampToDate(endTimestmp));
-        travelViewModel.insertTravel(travel);
         setResult(RESULT_OK);
         finish();
     }
@@ -159,9 +219,9 @@ public class EditTravelActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode !=RESULT_OK) return;
-        switch (requestCode){
-            case MyConst.REQCD_PLACE_AUTOCOMPLETE:{
+        if (resultCode != RESULT_OK) return;
+        switch (requestCode) {
+            case MyConst.REQCD_PLACE_AUTOCOMPLETE: {
                 place = PlaceAutocomplete.getPlace(this, data);
                 Log.i(TAG, "onActivityResult: place=" + place);
                 travelPlace.setText(place.getName());

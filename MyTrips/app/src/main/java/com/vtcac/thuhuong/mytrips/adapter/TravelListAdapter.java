@@ -41,7 +41,6 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.Tr
         notifyDataSetChanged();
     }
 
-
     private Travel getItem(int position) {
         if (getItemCount() == 0) return null;
         return travelList.get(position);
