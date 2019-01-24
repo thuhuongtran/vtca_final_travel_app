@@ -1,16 +1,16 @@
 package com.vtcac.thuhuong.mytrips.entity;
 
+import java.util.Objects;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "travel")
-@Fts4
 public class Travel extends TravelBaseEntity {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "rowid")
     private long id;
     private String endDt;
     private String imgUri;
@@ -20,7 +20,20 @@ public class Travel extends TravelBaseEntity {
     public Travel(String title) {
         this.title = title;
     }
+    @Override
+    public int hashCode() {
 
+        return Objects.hash(super.hashCode(), id, endDt);
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Travel)) return false;
+        if (!super.equals(o)) return false;
+        Travel travel = (Travel) o;
+        return id == travel.id &&
+                Objects.equals(endDt, travel.endDt);
+    }
 
     public String getImgUri() {
         return imgUri;

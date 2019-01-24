@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.facebook.stetho.Stetho;
 import com.vtcac.thuhuong.mytrips.utils.MyConst;
 
 public class MyApplication extends Application {
@@ -13,6 +14,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Stetho.initializeWithDefaults(this);
         getTravelSortOption();
     }
 

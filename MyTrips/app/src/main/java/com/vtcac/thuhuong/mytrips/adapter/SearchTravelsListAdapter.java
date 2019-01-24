@@ -2,6 +2,7 @@ package com.vtcac.thuhuong.mytrips.adapter;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vtcac.thuhuong.mytrips.R;
+import com.vtcac.thuhuong.mytrips.SearchableActivity;
 import com.vtcac.thuhuong.mytrips.base.ListItemClickListener;
 import com.vtcac.thuhuong.mytrips.entity.Travel;
 import com.vtcac.thuhuong.mytrips.utils.MyImage;
@@ -20,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchTravelsListAdapter extends RecyclerView.Adapter<SearchTravelsListAdapter.SearchViewHolder>{
+    private final static String TAG = SearchableActivity.class.getSimpleName();
     private ListItemClickListener listItemClickListener;
     private List<Travel> travelList;
     private final LayoutInflater layoutInflater;
@@ -54,7 +57,7 @@ public class SearchTravelsListAdapter extends RecyclerView.Adapter<SearchTravels
         Travel item = getItem(position);
         if (item == null) return;
         if (MyString.isEmpty(item.getImgUri())) {
-            holder.ivTravelImg.setImageResource(MyImage.getDefaultImgID(position));
+            holder.ivTravelImg.setImageResource(MyImage.getDefaultImgID(MyImage.getRandomNumber()));
         } else {
             holder.ivTravelImg.setImageURI(Uri.parse(item.getImgUri()));
         }
@@ -78,7 +81,10 @@ public class SearchTravelsListAdapter extends RecyclerView.Adapter<SearchTravels
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listItemClickListener.onListItemClick(itemView, getAdapterPosition()
+                    // todo fix wrong id = -1
+                    Log.d(TAG, "SearchViewHolder: itemView.id="+itemView.getId()+"position="+getAdapterPosition()
+                            +"item.placename="+getItem(getAdapterPosition()).getPlaceName());
+                    listItemClickListener.onListItemClick(v, getAdapterPosition()
                             , getItem(getAdapterPosition()));
                 }
             });

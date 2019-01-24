@@ -14,23 +14,23 @@ import androidx.room.Update;
 
 @Dao
 public interface TravelDao {
-    @Query("SELECT *,`rowid` FROM travel")
+    @Query("SELECT * FROM travel")
     LiveData<List<Travel>> getAllTravelsDefault();
     /**
      * get travels sorted by newest end date
      *
      * @return paged_list travels
      */
-    @Query("SELECT *,`rowid` FROM travel ORDER BY endDt DESC")
+    @Query("SELECT * FROM travel ORDER BY endDt DESC")
     LiveData<List<Travel>> getAllTravelsByEndDesc();
 
-    @Query("SELECT *,`rowid` FROM travel WHERE placeName MATCH :placeName")
+    @Query("SELECT * FROM travel WHERE placeName LIKE :placeName")
     LiveData<List<Travel>> getAllTravelsByTypingCity(String placeName);
 
-    @Query("SELECT *,`rowid` FROM travel ORDER BY title ASC")
+    @Query("SELECT * FROM travel ORDER BY title ASC")
     LiveData<List<Travel>> getAllTravelsByTitleAsc();
 
-    @Query("SELECT *,`rowid` FROM travel ORDER BY title DESC")
+    @Query("SELECT * FROM travel ORDER BY title DESC")
     LiveData<List<Travel>> getAllTravelsByTitleDsc();
 
     /**
@@ -38,10 +38,10 @@ public interface TravelDao {
      *
      * @return paged_list travels
      */
-    @Query("SELECT *,`rowid` FROM travel ORDER BY startDt DESC")
+    @Query("SELECT * FROM travel ORDER BY startDt DESC")
     LiveData<List<Travel>> getAllTravelsByStartDesc();
 
-    @Query("SELECT *,`rowid` FROM travel ORDER BY startDt ASC")
+    @Query("SELECT * FROM travel ORDER BY startDt ASC")
     LiveData<List<Travel>> getAllTravelsByStartAsc();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -52,5 +52,8 @@ public interface TravelDao {
 
     @Update
     void update(Travel... travels);
+
+    @Query("SELECT * FROM travel WHERE id=:id")
+    LiveData<Travel> getTravelById(long id);
 
 }

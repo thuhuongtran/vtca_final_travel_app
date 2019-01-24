@@ -79,12 +79,13 @@ public class TravelBaseEntity implements Serializable {
     @Override
     public String toString() {
         return "TravelBaseEntity{" +
-                "startDt='" + startDt + '\'' +
+                ", startDt='" + startDt + '\'' +
                 ", title='" + title + '\'' +
                 ", desc='" + desc + '\'' +
                 ", placeName='" + placeName + '\'' +
                 ", placeAddr='" + placeAddr + '\'' +
                 ", placeLat=" + placeLat +
+                ", placeId='" + placeId + '\'' +
                 ", placeLng=" + placeLng +
                 '}';
     }

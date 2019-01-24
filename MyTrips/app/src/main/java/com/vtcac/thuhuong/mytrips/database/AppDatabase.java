@@ -2,14 +2,16 @@ package com.vtcac.thuhuong.mytrips.database;
 
 import android.content.Context;
 
+import com.vtcac.thuhuong.mytrips.dao.PlanDao;
 import com.vtcac.thuhuong.mytrips.dao.TravelDao;
+import com.vtcac.thuhuong.mytrips.entity.Plan;
 import com.vtcac.thuhuong.mytrips.entity.Travel;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Travel.class},version = 4)
+@Database(entities = {Travel.class, Plan.class},version = 10)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
     public static AppDatabase getDatabase(final Context context) {
@@ -26,4 +28,6 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
     public abstract TravelDao travelDao();
+
+    public abstract PlanDao planDao();
 }

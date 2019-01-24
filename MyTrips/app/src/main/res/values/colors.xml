@@ -24,4 +24,7 @@
     <color name="colorLogoOrange">#d7782b</color>
     <color name="colorLine">#9c9b9b</color>
     <color name="colorViewOnClick">#f4f4f4</color>
+    <color name="color_transparent_black">#60000000</color>
+    <color name="color_transparent_black_onlick">#25ffffff</color>
+    <color name="colorDeleteButton">#e14e4e</color>
 </resources>

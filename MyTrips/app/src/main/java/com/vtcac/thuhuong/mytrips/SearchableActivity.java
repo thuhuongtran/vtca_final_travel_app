@@ -1,5 +1,6 @@
 package com.vtcac.thuhuong.mytrips;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,8 @@ import com.vtcac.thuhuong.mytrips.base.ListItemClickListener;
 import com.vtcac.thuhuong.mytrips.entity.Travel;
 import com.vtcac.thuhuong.mytrips.entity.TravelBaseEntity;
 import com.vtcac.thuhuong.mytrips.model.TravelViewModel;
+import com.vtcac.thuhuong.mytrips.traveldetail.TravelDetailActivity;
+import com.vtcac.thuhuong.mytrips.utils.MyConst;
 
 import java.util.List;
 
@@ -24,7 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchableActivity extends BaseActivity implements ListItemClickListener,
-View.OnClickListener{
+        View.OnClickListener {
     private final static String TAG = SearchableActivity.class.getSimpleName();
     private RecyclerView recyclerView;
     private EditText etTypeCity;
@@ -65,22 +68,24 @@ View.OnClickListener{
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ivCancelSearch.setVisibility(View.VISIBLE);
                 typingCity = s.toString();
-                Log.d(TAG, "onTextChanged: typing text="+typingCity);
+                Log.d(TAG, "onTextChanged: typing text=" + typingCity);
                 doMySearch(typingCity);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 typingCity = s.toString();
-                Log.d(TAG, "afterTextChanged: typedTxt="+typingCity);
+                Log.d(TAG, "afterTextChanged: typedTxt=" + typingCity);
                 doMySearch(typingCity);
             }
         });
 
         recyclerView = findViewById(R.id.recyclerView);
         searchAdapter = new SearchTravelsListAdapter(this);
+        searchAdapter.setListItemClickListener(this);
         travelsViewModel = ViewModelProviders.of(this).get(TravelViewModel.class);
     }
+
     private void doMySearch(String placeName) {
         recyclerView.setAdapter(searchAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -89,8 +94,15 @@ View.OnClickListener{
 
     @Override
     public void onListItemClick(View v, int position, TravelBaseEntity entity) {
-        // todo go to travel detail
+        Travel item = (Travel) entity;
+        Log.d(TAG, "onListItemClick: item id=" + item.getId());
+        // call TravelDetailActivity
+        Intent intent = new Intent(SearchableActivity.this, TravelDetailActivity.class);
+        intent.putExtra(MyConst.REQKEY_TRAVEL_ID, item.getId());
+        Log.d(TAG, "onListItemClick: item.id="+item.getId());
+        startActivity(intent);
         finish();
+        return;
     }
 
     @Override

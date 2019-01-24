@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_list_item"
+    android:layout_height="@dimen/height_list_item_88"
+    android:background="@drawable/bg_view_onclick"
     android:orientation="horizontal">
 
     <ImageView
@@ -26,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvTravelTitle"
+            android:id="@+id/tvTravelCity"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +42,7 @@
             android:id="@+id/tvTravelPlaceAddr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvTravelTitle"
+            android:layout_below="@id/tvTravelCity"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:paddingLeft="@dimen/padding_left_list_item_text"

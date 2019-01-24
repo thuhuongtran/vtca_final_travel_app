@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_list_item_88"
+    android:background="@drawable/bg_view_onclick">
+
+    <ImageView
+        android:id="@+id/ivPlanItem"
+        android:layout_width="@dimen/width_height_imgview_24"
+        android:layout_height="@dimen/width_height_imgview_24"
+        android:layout_marginLeft="@dimen/margin_normal_16"
+        android:src="@drawable/ic_plan_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPlanItem"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvPlanTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:paddingLeft="@dimen/margin_32"
+            android:paddingTop="@dimen/margin_normal_16"
+            android:paddingRight="@dimen/margin_normal_16"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            tools:text="Plan title" />
+
+        <TextView
+            android:id="@+id/tvPlanPlace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.6"
+            android:drawableStart="@drawable/ic_location_plan_item"
+            android:drawableTint="@color/colorPrimary"
+            android:paddingTop="@dimen/margin_normal_16"
+            android:paddingRight="@dimen/margin_normal_16"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textStyle="bold"
+            tools:text="City name" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvPlanDateTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/margin_32"
+        android:paddingRight="@dimen/margin_normal_16"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        android:textColor="#5b5b5b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPlanItem"
+        app:layout_constraintTop_toBottomOf="@id/ll"
+        tools:text="Jan 1, 2019 08:09 PM" />
+
+    <TextView
+        android:id="@+id/tvPlanDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/margin_32"
+        android:paddingRight="@dimen/margin_32"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPlanItem"
+        app:layout_constraintTop_toBottomOf="@id/tvPlanDateTime"
+        tools:text="plan description plan dede dede dede dede de dede" />
+
+    <ImageView
+        android:id="@+id/ivDelPlan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_view_onclick"
+        android:paddingHorizontal="@dimen/margin_normal_8"
+        android:paddingVertical="4dp"
+        android:src="@drawable/ic_clear_item_detail"
+        android:tint="@color/colorDeleteButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="@color/colorLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,7 +50,7 @@ public class EditTravelActivity extends BaseActivity implements View.OnClickList
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        travelTitle = findViewById(R.id.etTravelTitle);
+        travelTitle = findViewById(R.id.etPlanTitle);
         travelPlace = findViewById(R.id.tvPlace);
         travelStartDt = findViewById(R.id.tvStartDt);
         travelEndDt = findViewById(R.id.tvEndDt);
@@ -203,7 +203,7 @@ public class EditTravelActivity extends BaseActivity implements View.OnClickList
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Object tag = view.getTag();
         Calendar calendar = Calendar.getInstance();
-        if (tag.equals(R.id.tvStartDt)) {
+        if (tag.equals(R.id.tvPlanDate)) {
             calendar.set(year, month, dayOfMonth, 0, 0, 0);
             if (endTimestmp > 0 && endTimestmp < calendar.getTimeInMillis()) return;
             startTimestmp = calendar.getTimeInMillis();

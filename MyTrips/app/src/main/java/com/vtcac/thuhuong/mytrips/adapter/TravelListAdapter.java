@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.vtcac.thuhuong.mytrips.R;
 import com.vtcac.thuhuong.mytrips.base.ListItemClickListener;
 import com.vtcac.thuhuong.mytrips.entity.Travel;
+import com.vtcac.thuhuong.mytrips.utils.MyDate;
 import com.vtcac.thuhuong.mytrips.utils.MyImage;
 import com.vtcac.thuhuong.mytrips.utils.MyString;
 
@@ -58,7 +59,7 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.Tr
         Travel item = getItem(position);
         if (item == null) return;
         if (MyString.isEmpty(item.getImgUri())) {
-            holder.ivTravelImg.setImageResource(MyImage.getDefaultImgID(position));
+            holder.ivTravelImg.setImageResource(MyImage.getDefaultImgID(MyImage.getRandomNumber()));
         } else {
             holder.ivTravelImg.setImageURI(Uri.parse(item.getImgUri()));
         }
@@ -86,10 +87,11 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.Tr
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    listItemClickListener.onListItemClick(v, getAdapterPosition()
+                            , getItem(getAdapterPosition()));
                 }
             });
-            tvTravelTitle = itemView.findViewById(R.id.tvTravelTitle);
+            tvTravelTitle = itemView.findViewById(R.id.tvTravelCity);
             tvTravelPlaceAddr = itemView.findViewById(R.id.tvTravelPlaceAddr);
             tvTravelDateTime = itemView.findViewById(R.id.tvTravelDateTime);
             ivTravelImg = itemView.findViewById(R.id.ivTravelImg);

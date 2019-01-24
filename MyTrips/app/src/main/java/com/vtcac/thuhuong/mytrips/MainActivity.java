@@ -19,6 +19,7 @@ import com.vtcac.thuhuong.mytrips.base.MyApplication;
 import com.vtcac.thuhuong.mytrips.entity.Travel;
 import com.vtcac.thuhuong.mytrips.entity.TravelBaseEntity;
 import com.vtcac.thuhuong.mytrips.model.TravelViewModel;
+import com.vtcac.thuhuong.mytrips.traveldetail.TravelDetailActivity;
 import com.vtcac.thuhuong.mytrips.utils.MyConst;
 
 import java.util.List;
@@ -150,6 +151,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onListItemClick(View v, int position, TravelBaseEntity entity) {
+        Travel item = (Travel) entity;
+        Log.d(TAG, "onListItemClick: item id=" + item.getId());
+        // call TravelDetailActivity
+        Intent intent = new Intent(MainActivity.this, TravelDetailActivity.class);
+        intent.putExtra(MyConst.REQKEY_TRAVEL_ID, item.getId());
+        Log.d(TAG, "onListItemClick: item.id="+item.getId());
+        startActivity(intent);
         return;
     }
 

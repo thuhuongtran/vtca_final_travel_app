@@ -2,6 +2,8 @@ package com.vtcac.thuhuong.mytrips.utils;
 
 import com.vtcac.thuhuong.mytrips.R;
 
+import java.util.Random;
+
 public class MyImage {
     public static int getDefaultImgID(int itemPosition) {
         int tempPosition = 0;
@@ -35,5 +37,12 @@ public class MyImage {
                 return R.mipmap.default_img10;
         }
         return R.mipmap.default_img1;
+    }
+
+    // get random number
+    public static int getRandomNumber() {
+        Random rand = new Random();
+        int value = rand.nextInt(50);
+        return value;
     }
 }

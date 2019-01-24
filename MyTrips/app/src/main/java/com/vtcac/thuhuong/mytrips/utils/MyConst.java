@@ -18,4 +18,13 @@ public class MyConst {
     public static final String TRAVEL_SORT_KEY = "TRAVEL_SORT_KEY";
     public static final String TRAVEL_LIST_SIZE = "TRAVEL_LIST_SIZE";
 
+    public static final String REQKEY_PLAN ="REQKEY_PLAN" ;
+    public static final int REQCD_ADD_PLAN = 4000;
+    public static final int REQCD_EDIT_PLAN = 4001;
+    public static final String REQKEY_TRAVEL_ID = "REQKEY_TRAVEL_ID";
+    public static final String AC_PLAN = "AC_PLAN";
+    public static final String AC_ADD_PLAN = "AC_ADD_PLAN";
+    public static final String AC_EDIT_PLAN = "AC_EDIT_PLAN";
+    public static final String OBJ_PLAN = "OBJ_PLAN";
+    public static final int REQCD_PLACE_PICKER = 5000;
 }

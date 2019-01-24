@@ -2,10 +2,16 @@ package com.vtcac.thuhuong.mytrips;
 
 import android.util.Log;
 
+import com.vtcac.thuhuong.mytrips.dao.TravelDao;
+import com.vtcac.thuhuong.mytrips.database.AppDatabase;
 import com.vtcac.thuhuong.mytrips.utils.MyDate;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,7 +19,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -21,6 +27,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
     private static final String TAG = ExampleUnitTest.class.getSimpleName();
     @Test
     public void addition_isCorrect() {
@@ -51,4 +58,10 @@ public class ExampleUnitTest {
         System.out.println(System.currentTimeMillis());
         System.out.println(MyDate.timestampToDate(calendar.getTimeInMillis()));
     }
+
+    @Test
+    public void testTimestampToTime() {
+        System.out.println(MyDate.timestampToTime(System.currentTimeMillis()));
+    }
+
 }

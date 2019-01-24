@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="vtcac.thuhuong.tabbeddemo.MainActivity">
+    <item
+        android:id="@+id/mniChangeCover"
+        android:orderInCategory="100"
+        android:title="Change cover"
+        app:showAsAction="never" />
+</menu>

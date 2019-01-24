@@ -21,4 +21,14 @@
     <string name="button_txt_add">Add</string>
     <string name="button_txt_edit">Change</string>
     <string name="title_dialog_delete_travel">Are you sure want to delete this entry?</string>
+    <string name="tab_plan">PLANs</string>
+    <string name="tab_diary">diary</string>
+    <string name="tab_expense">expense</string>
+    <string name="place_item_plan">Select place</string>
+    <string name="warn_empty_plan_title">Plan title is empty</string>
+    <string name="warn_empty_plan_place">Please choose a place.</string>
+    <string name="title_toolbar_add_plan">New Plan</string>
+    <string name="title_toolbar_edit_plan">Edit Plan</string>
+    <string name="no_google_map">There are no Google Maps APPs.</string>
+
 </resources>
