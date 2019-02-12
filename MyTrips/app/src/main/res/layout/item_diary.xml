@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginTop="4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/ivDiaryImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:adjustViewBounds="true"
+        tools:src="@mipmap/default_img1"
+        android:layout_width="0dp"
+        android:scaleType="centerCrop"
+        android:layout_height="wrap_content" />
+    <ImageView
+        app:layout_constraintEnd_toEndOf="@id/ivDiaryImg"
+        app:layout_constraintTop_toTopOf="@id/ivDiaryImg"
+        app:layout_constraintRight_toRightOf="@id/ivDiaryImg"
+        android:id="@+id/ivDiaryMoreMenu"
+        android:background="@drawable/bg_imgview_onclick"
+        android:padding="@dimen/margin_normal_8"
+        android:src="@drawable/ic_menu_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvDiaryDetail"
+        android:paddingHorizontal="@dimen/margin_normal_16"
+        android:paddingVertical="@dimen/margin_normal_8"
+        tools:text="Image view"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:singleLine="true"
+        android:background="@color/color_bg_txtview_transparent"
+        app:layout_constraintBottom_toBottomOf="@id/ivDiaryImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</androidx.constraintlayout.widget.ConstraintLayout>

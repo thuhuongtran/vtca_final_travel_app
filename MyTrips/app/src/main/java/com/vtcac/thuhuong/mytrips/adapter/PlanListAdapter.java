@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vtcac.thuhuong.mytrips.R;
-import com.vtcac.thuhuong.mytrips.base.ImgviewItemListClickListener;
 import com.vtcac.thuhuong.mytrips.base.ListItemClickListener;
+import com.vtcac.thuhuong.mytrips.base.ViewItemListClickListener;
 import com.vtcac.thuhuong.mytrips.entity.Plan;
 import com.vtcac.thuhuong.mytrips.utils.MyString;
 
@@ -23,10 +23,10 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanVi
     private List<Plan> planList;
     private final LayoutInflater layoutInflater;
     private ListItemClickListener listItemClickListener;
-    private ImgviewItemListClickListener imgviewItemListClickListener;
+    private ViewItemListClickListener viewItemListClickListener;
 
-    public void setImgviewItemListClickListener(ImgviewItemListClickListener imgviewItemListClickListener) {
-        this.imgviewItemListClickListener = imgviewItemListClickListener;
+    public void setViewItemListClickListener(ViewItemListClickListener viewItemListClickListener) {
+        this.viewItemListClickListener = viewItemListClickListener;
     }
 
     public void setListItemClickListener(ListItemClickListener listItemClickListener) {
@@ -100,8 +100,15 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanVi
             ivDelPlan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgviewItemListClickListener.onImgviewItemListClick(v,getAdapterPosition()
+                    viewItemListClickListener.onViewItemListClick(v,getAdapterPosition()
                     ,getItem(getAdapterPosition()));
+                }
+            });
+            tvPlanPlace.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewItemListClickListener.onViewItemListClick(v,getAdapterPosition()
+                            ,getItem(getAdapterPosition()));
                 }
             });
         }

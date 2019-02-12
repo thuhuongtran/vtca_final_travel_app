@@ -1,12 +1,11 @@
 package com.vtcac.thuhuong.mytrips.traveldetail;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -19,20 +18,20 @@ import com.vtcac.thuhuong.mytrips.base.BaseActivity;
 import com.vtcac.thuhuong.mytrips.entity.Travel;
 import com.vtcac.thuhuong.mytrips.utils.MyConst;
 import com.vtcac.thuhuong.mytrips.utils.MyImage;
+import com.vtcac.thuhuong.mytrips.utils.MyString;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
-public class TravelDetailActivity extends BaseActivity implements View.OnClickListener{
+public class TravelDetailActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = TravelDetailActivity.class.getSimpleName();
 
     private SectionsPagerAdapter sectionsPagerAdapter;
     private Intent receivedIntent;
     private TravelDetailViewModel travelDetailViewModel;
     private Travel mTravel;
-
     // view
     private TextView tvTravelDetailTitle;
     private ImageView ivMoreVertChangeCover;
@@ -47,15 +46,19 @@ public class TravelDetailActivity extends BaseActivity implements View.OnClickLi
         public void onChanged(Travel travel) {
             Log.d(TAG, "onChanged: travel=" + travel);
             if (travel == null) return;
-            Log.d(TAG, "onCreate: traveldetailviewmodel="+travel.getPlaceName()
-                    +" title="+travel.getTitle()+" date="+travel.getStartDt());
+            Log.d(TAG, "onCreate: traveldetailviewmodel=" + travel.getPlaceName()
+                    + " title=" + travel.getTitle() + " date=" + travel.getStartDt());
             mTravel = travel;
             tvTravelDetailTitle.setText(travel.getPlaceName());
             tvTravelDetailDate.setText(travel.getStartDt());
-            // todo check null image then set image from db
-            ivTravelDetailCover.setImageResource(MyImage.getDefaultImgID(MyImage.getRandomNumber()));
+            if (MyString.isEmpty(travel.getImgUri())) {
+                ivTravelDetailCover.setImageResource(MyImage.getDefaultImgID(MyImage.getRandomNumber()));
+            } else {
+                ivTravelDetailCover.setImageURI(Uri.parse(travel.getImgUri()));
+            }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +67,7 @@ public class TravelDetailActivity extends BaseActivity implements View.OnClickLi
         tvCity.setText("city name");
 
         // view pager
-        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),this);
+        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
         viewPager = findViewById(R.id.vp);
         viewPager.setAdapter(sectionsPagerAdapter);
 
@@ -87,7 +90,7 @@ public class TravelDetailActivity extends BaseActivity implements View.OnClickLi
         // get received Intent
         receivedIntent = getIntent();
         final long travelId = receivedIntent.getLongExtra(MyConst.REQKEY_TRAVEL_ID, 0);
-        Log.d(TAG, "onCreate: travel.id="+travelId);
+        Log.d(TAG, "onCreate: travel.id=" + travelId);
 
         travelDetailViewModel = ViewModelProviders.of(this).get(TravelDetailViewModel.class);
         travelDetailViewModel.setTravelId(travelId);
@@ -119,14 +122,40 @@ public class TravelDetailActivity extends BaseActivity implements View.OnClickLi
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.mniChangeCover:
-                                // todo change image cover
+                            case R.id.mniTakePhoto:
+                                requestPermissions(MyConst.REQCD_ACCESS_CAMERA);
+                                takePhotoFromCamera();
+                                break;
+                            case R.id.mniChoosePhoto:
+                                requestPermissions(MyConst.REQCD_ACCESS_GALLERY);
+                                takePhotoFromGallery();
                                 break;
                         }
                         return true;
                     }
                 });
                 popupMenu.show();
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        TravelDetailBaseFragment fragment = (TravelDetailBaseFragment) sectionsPagerAdapter
+                .getRegisteredFragment(viewPager.getCurrentItem());
+        fragment.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode != RESULT_OK) return;
+        Log.d(TAG, "onActivityResult: requestCode=" + requestCode);
+        switch (requestCode) {
+            case MyConst.REQCD_IMAGE_GALLERY:
+            case MyConst.REQCD_IMAGE_CAMERA:
+                if (MyString.isEmpty(getImgPath())) return;
+                Log.d(TAG, "onActivityResult: img-path=" + getImgPath());
+                mTravel.setImgUri(getImgPath());
+                travelDetailViewModel.updateTravel(mTravel);
+                ivTravelDetailCover.setImageURI(Uri.parse(getImgPath()));
                 break;
         }
     }

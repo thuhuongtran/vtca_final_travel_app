@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".traveldetail.expense.EditExpenseActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Edit Expense"
+        app:titleTextColor="@android:color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_round_corner_rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbToolbar">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEtTitle"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
+            android:layout_marginTop="28dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etExpenseTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Expense title"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tilEtTitle"
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
+            android:layout_marginTop="23dp">
+
+            <TextView
+                android:id="@+id/tvStartTitle"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Date"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvExpenseDate"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:background="@drawable/bg_view_onclick"
+                android:drawableStart="@drawable/ic_date_range"
+                android:drawableTint="@color/colorIconMenu"
+                android:text="Select date"
+                android:textColor="@color/colorSecondary"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/vlLine1"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/ll1"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorLine" />
+
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vlLine1"
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
+            android:layout_marginTop="@dimen/margin_normal_16">
+
+            <TextView
+                android:id="@+id/tvEndTitle"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Time"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvExpenseTime"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:background="@drawable/bg_view_onclick"
+                android:drawableStart="@drawable/ic_access_time"
+                android:drawableTint="@color/colorIconMenu"
+                android:text="Select time"
+                android:textColor="@color/colorSecondary"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/vlLine"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/ll2"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorLine" />
+
+        <LinearLayout
+            android:id="@+id/ll3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vlLine"
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
+            android:layout_marginTop="@dimen/margin_normal_16">
+
+            <TextView
+                android:id="@+id/tvSelectPlace"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Select place"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvExpPlace"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_view_onclick"
+                android:drawableStart="@drawable/ic_location"
+                android:drawableTint="@color/colorIconMenu"
+                android:text="Select place"
+                android:textColor="@color/colorIconInForm" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/vlLine2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/ll3"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorLine" />
+        <TextView
+            android:id="@+id/tvExpAmTitle"
+            android:layout_below="@id/vlLine2"
+            android:text="Expense amount"
+            android:padding="@dimen/margin_normal_16"
+            android:onClick="onClick"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/ll4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvExpAmTitle"
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etExpAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                tools:text="999,999,999"
+                android:singleLine="true"
+                android:text="000" />
+
+            <Spinner
+                android:id="@+id/spExpCurrency"
+                style="@android:style/Widget.Material.DropDownItem.Spinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:entries="@array/currency_label"/>
+            <Spinner
+                android:id="@+id/spExpType"
+                android:layout_width="0dp"
+                android:entries="@array/expense_type_label"
+                android:paddingVertical="4dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEtDesc"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll4"
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
+            android:layout_marginTop="@dimen/margin_normal_16">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etExpDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Expense Description"
+                android:maxLength="1024"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnAddEdit"
+            android:layout_width="150dp"
+            android:onClick="onClick"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tilEtDesc"
+            android:layout_alignParentRight="true"
+            android:layout_marginHorizontal="@dimen/margin_normal_16"
+            android:layout_marginTop="28dp"
+            android:text="Add" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

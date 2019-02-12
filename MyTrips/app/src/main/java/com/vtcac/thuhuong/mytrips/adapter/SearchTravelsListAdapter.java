@@ -81,7 +81,6 @@ public class SearchTravelsListAdapter extends RecyclerView.Adapter<SearchTravels
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // todo fix wrong id = -1
                     Log.d(TAG, "SearchViewHolder: itemView.id="+itemView.getId()+"position="+getAdapterPosition()
                             +"item.placename="+getItem(getAdapterPosition()).getPlaceName());
                     listItemClickListener.onListItemClick(v, getAdapterPosition()

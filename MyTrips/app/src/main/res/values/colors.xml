@@ -22,9 +22,14 @@
     <color name="colorBackgroundTint">#d9d8d8</color>
     <color name="colorError">#d20b0b</color>
     <color name="colorLogoOrange">#d7782b</color>
+    <color name="colorTypeBudget">#11993c</color>
+    <color name="colorTypeExpense">#d7690e</color>
     <color name="colorLine">#9c9b9b</color>
     <color name="colorViewOnClick">#f4f4f4</color>
     <color name="color_transparent_black">#60000000</color>
-    <color name="color_transparent_black_onlick">#25ffffff</color>
+    <color name="color_bg_txtview_transparent">#80000000</color>
+    <color name="color_transparent_onlick">#25ffffff</color>
     <color name="colorDeleteButton">#e14e4e</color>
+    <color name="transparent_black">#AB000000</color>
+
 </resources>

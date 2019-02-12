@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_app_bar">
+
+        <ImageView
+            android:id="@+id/ivDiaryImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_img1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_transparent_black" />
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:layout_alignTop="@id/tvCommonTitle"
+            android:background="@drawable/bg_imgview_onclick"
+            android:padding="@dimen/margin_normal_16"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tvCommonTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingLeft="72dp"
+            android:paddingTop="@dimen/margin_normal_16"
+            android:paddingRight="@dimen/margin_normal_16"
+            android:singleLine="true"
+            android:text="Edit Diary"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/ivChangeCover"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_alignTop="@id/tvCommonTitle"
+            android:layout_alignBottom="@+id/tvCommonTitle"
+            android:layout_alignParentRight="true"
+            android:onClick="onClick"
+            android:background="@drawable/bg_imgview_onclick"
+            android:paddingHorizontal="@dimen/margin_normal_16"
+            android:src="@drawable/ic_more_vert"
+            android:tint="@android:color/white" />
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCommonTitle"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/margin_normal_16"
+            android:paddingVertical="25dp">
+
+            <TextView
+                android:id="@+id/tvDiaryDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/bg_imgview_onclick"
+                android:drawableStart="@drawable/ic_date_range_18"
+                android:drawablePadding="4dp"
+                android:drawableTint="@android:color/white"
+                android:gravity="center_vertical"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:onClick="onClick"
+                android:text="Diary Date"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDiaryTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/bg_imgview_onclick"
+                android:drawableStart="@drawable/ic_access_time_18"
+                android:drawablePadding="4dp"
+                android:drawableTint="@android:color/white"
+                android:gravity="center_vertical"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:onClick="onClick"
+                android:text="Diary Time"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDiaryPlace"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/bg_imgview_onclick"
+                android:drawableStart="@drawable/ic_location_city_white_16"
+                android:drawablePadding="4dp"
+                android:drawableTint="@android:color/white"
+                android:gravity="center_vertical"
+                android:padding="4dp"
+                android:onClick="onClick"
+                android:singleLine="true"
+                android:text="Diary Place"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvDescTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_normal_16"
+        android:text="Diary description"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        app:layout_constraintTop_toBottomOf="@+id/rlHeader" />
+
+    <View
+        android:id="@+id/vLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorLine"
+        app:layout_constraintTop_toBottomOf="@id/tvDescTitle" />
+
+    <EditText
+        android:id="@+id/etDiaryDesc"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="top"
+        android:background="@drawable/bg_editbox_white_rect"
+        android:hint="Enter your description here."
+        android:onClick="onClick"
+        android:padding="@dimen/margin_normal_16"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditDiary"
+        app:layout_constraintTop_toBottomOf="@id/vLine" />
+
+    <Button
+        android:id="@+id/btnEditDiary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:layout_margin="@dimen/margin_normal_16"
+        android:text="add"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

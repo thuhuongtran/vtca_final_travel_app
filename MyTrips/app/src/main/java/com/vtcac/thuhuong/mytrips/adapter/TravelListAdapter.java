@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.vtcac.thuhuong.mytrips.R;
 import com.vtcac.thuhuong.mytrips.base.ListItemClickListener;
+import com.vtcac.thuhuong.mytrips.base.ViewItemListClickListener;
 import com.vtcac.thuhuong.mytrips.entity.Travel;
 import com.vtcac.thuhuong.mytrips.utils.MyDate;
 import com.vtcac.thuhuong.mytrips.utils.MyImage;
@@ -28,6 +29,11 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.Tr
     private List<Travel> travelList;
     private final LayoutInflater layoutInflater;
     private ListItemClickListener listItemClickListener;
+    private ViewItemListClickListener viewItemListClickListener;
+
+    public void setViewItemListClickListener(ViewItemListClickListener viewItemListClickListener) {
+        this.viewItemListClickListener = viewItemListClickListener;
+    }
 
     public void setListItemClickListener(ListItemClickListener listItemClickListener) {
         this.listItemClickListener = listItemClickListener;
@@ -122,6 +128,13 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.Tr
                         }
                     });
                     popupMenu.show();
+                }
+            });
+            ivTravelImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewItemListClickListener.onViewItemListClick(v,getAdapterPosition()
+                            ,getItem(getAdapterPosition()));
                 }
             });
         }

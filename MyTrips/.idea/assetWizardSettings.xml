@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/AS32/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_clear_all_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/AS32/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_menu_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,11 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="height" value="18" />
-                            <entry key="outputName" value="ic_clear_item_detail" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_menu" />
                             <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\ADMIN" />
-                            <entry key="width" value="18" />
                           </map>
                         </option>
                       </PersistentState>

@@ -4,9 +4,9 @@ import android.content.Context;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
-import com.vtcac.thuhuong.mytrips.traveldetail.fragment.FragmentDiary;
-import com.vtcac.thuhuong.mytrips.traveldetail.fragment.FragmentExpense;
-import com.vtcac.thuhuong.mytrips.traveldetail.fragment.FragmentPlan;
+import com.vtcac.thuhuong.mytrips.traveldetail.diary.FragmentDiary;
+import com.vtcac.thuhuong.mytrips.traveldetail.expense.FragmentExpense;
+import com.vtcac.thuhuong.mytrips.traveldetail.plan.FragmentPlan;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;

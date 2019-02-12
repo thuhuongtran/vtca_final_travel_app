@@ -3,6 +3,7 @@ package com.vtcac.thuhuong.mytrips;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,11 +17,13 @@ import com.vtcac.thuhuong.mytrips.adapter.TravelListAdapter;
 import com.vtcac.thuhuong.mytrips.base.BaseActivity;
 import com.vtcac.thuhuong.mytrips.base.ListItemClickListener;
 import com.vtcac.thuhuong.mytrips.base.MyApplication;
+import com.vtcac.thuhuong.mytrips.base.ViewItemListClickListener;
 import com.vtcac.thuhuong.mytrips.entity.Travel;
 import com.vtcac.thuhuong.mytrips.entity.TravelBaseEntity;
 import com.vtcac.thuhuong.mytrips.model.TravelViewModel;
 import com.vtcac.thuhuong.mytrips.traveldetail.TravelDetailActivity;
 import com.vtcac.thuhuong.mytrips.utils.MyConst;
+import com.vtcac.thuhuong.mytrips.utils.MyString;
 
 import java.util.List;
 
@@ -32,13 +35,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener
-        , ListItemClickListener {
+        , ListItemClickListener, ViewItemListClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     private RecyclerView recyclerView;
     private RelativeLayout rlIntroduce;
     private ImageView ivSearch;
     private ImageView ivMoreSort;
     private int sortOption = 0;
+    private Travel travelItem;
 
     private TravelListAdapter travelsAdapter;
     private TravelViewModel travelsViewModel;
@@ -82,6 +86,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
         travelsAdapter = new TravelListAdapter(this);
         travelsAdapter.setListItemClickListener(this);
+        travelsAdapter.setViewItemListClickListener(this);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(travelsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -98,7 +103,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         Log.d(TAG, "onActivityResult: data=" + data);
         if (resultCode != RESULT_OK) return;
         switch (requestCode) {
-
+            case MyConst.REQCD_IMAGE_GALLERY:
+                if(MyString.isEmpty(getImgPath())) return;
+                Log.d(TAG, "onActivityResult: img-path=" + getImgPath());
+                travelItem.setImgUri(getImgPath());
+                travelsViewModel.updateTravel(travelItem);
+                break;
         }
     }
 
@@ -172,7 +182,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.mniDelete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(R.string.title_dialog_delete_travel)
+                builder.setMessage(R.string.title_dialog_delete_item)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -195,6 +205,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                 // set negative button background
                 negativeBtn.setBackgroundColor(getResources().getColor(android.R.color.white));
                 negativeBtn.setTextColor(getResources().getColor(R.color.colorSecondary));
+                break;
+        }
+    }
+
+    @Override
+    public void onViewItemListClick(View v, int position, TravelBaseEntity entity) {
+        if(entity == null) return;
+        switch (v.getId()) {
+            case R.id.ivTravelImg:
+                travelItem = (Travel) entity;
+                requestPermissions(MyConst.REQCD_ACCESS_GALLERY);
+                takePhotoFromGallery();
                 break;
         }
     }

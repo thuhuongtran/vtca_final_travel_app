@@ -3,8 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="vtcac.thuhuong.tabbeddemo.MainActivity">
     <item
-        android:id="@+id/mniChangeCover"
+        android:id="@+id/mniTakePhoto"
         android:orderInCategory="100"
-        android:title="Change cover"
+        android:title="Take photo"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mniChoosePhoto"
+        android:orderInCategory="100"
+        android:title="Choose existing photo"
         app:showAsAction="never" />
 </menu>

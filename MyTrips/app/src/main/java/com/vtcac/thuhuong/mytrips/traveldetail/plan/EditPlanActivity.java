@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -110,7 +109,7 @@ public class EditPlanActivity extends BaseActivity implements View.OnClickListen
                 //desc
                 if (!plan.getDesc().equals("") && plan.getDesc() != null)
                     etPlanDesc.setText(plan.getDesc());
-                else etPlanTitle.setText(plan.getTitle());
+                else etPlanDesc.setText(plan.getTitle());
                 //date
                 if (!plan.getStartDt().equals("") && plan.getStartDt() != null) {
                     planDate = plan.getStartDt();

@@ -4,6 +4,6 @@ import android.view.View;
 
 import com.vtcac.thuhuong.mytrips.entity.TravelBaseEntity;
 
-public interface ImgviewItemListClickListener {
-    void onImgviewItemListClick(View v, int position, TravelBaseEntity entity);
+public interface ViewItemListClickListener {
+    void onViewItemListClick(View v, int position, TravelBaseEntity entity);
 }

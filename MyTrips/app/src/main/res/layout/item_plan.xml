@@ -40,6 +40,7 @@
         <TextView
             android:id="@+id/tvPlanPlace"
             android:layout_width="0dp"
+            android:background="@drawable/bg_view_onclick"
             android:layout_height="wrap_content"
             android:layout_weight="1.6"
             android:drawableStart="@drawable/ic_location_plan_item"
@@ -87,7 +88,7 @@
         android:paddingHorizontal="@dimen/margin_normal_8"
         android:paddingVertical="4dp"
         android:src="@drawable/ic_clear_item_detail"
-        android:tint="@color/colorDeleteButton"
+        android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

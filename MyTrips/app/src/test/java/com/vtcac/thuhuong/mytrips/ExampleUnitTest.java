@@ -61,7 +61,9 @@ public class ExampleUnitTest {
 
     @Test
     public void testTimestampToTime() {
+        System.out.println(System.currentTimeMillis());
         System.out.println(MyDate.timestampToTime(System.currentTimeMillis()));
+        System.out.println(MyDate.timestampToTime(1549968950));
     }
 
 }
