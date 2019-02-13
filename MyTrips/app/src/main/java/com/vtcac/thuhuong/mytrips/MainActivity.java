@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.vtcac.thuhuong.mytrips.adapter.TravelListAdapter;
 import com.vtcac.thuhuong.mytrips.base.BaseActivity;
 import com.vtcac.thuhuong.mytrips.base.ListItemClickListener;
@@ -43,6 +44,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     private ImageView ivMoreSort;
     private int sortOption = 0;
     private Travel travelItem;
+    FloatingActionButton fab;
 
     private TravelListAdapter travelsAdapter;
     private TravelViewModel travelsViewModel;
@@ -66,7 +68,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         Toolbar toolbar = findViewById(R.id.tbToolbar);
         setSupportActionBar(toolbar);
 
-        final FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,6 +218,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
             case R.id.ivTravelImg:
                 travelItem = (Travel) entity;
                 requestPermissions(MyConst.REQCD_ACCESS_GALLERY);
+                break;
+        }
+    }
+
+    @Override
+    protected void postRequestPermissionsResult(int reqCd, boolean result) {
+        super.postRequestPermissionsResult(reqCd, result);
+        if (!result) {
+            Snackbar.make(fab, R.string.permission_not_granted, Snackbar.LENGTH_LONG).show();
+            return;
+        }
+        switch (reqCd) {
+            case MyConst.REQCD_ACCESS_GALLERY:
                 takePhotoFromGallery();
                 break;
         }
