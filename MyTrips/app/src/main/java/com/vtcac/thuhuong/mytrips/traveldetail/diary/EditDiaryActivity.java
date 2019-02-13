@@ -18,6 +18,7 @@ import android.widget.TimePicker;
 
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.material.snackbar.Snackbar;
 import com.vtcac.thuhuong.mytrips.R;
 import com.vtcac.thuhuong.mytrips.base.BaseActivity;
 import com.vtcac.thuhuong.mytrips.entity.Diary;
@@ -199,11 +200,9 @@ public class EditDiaryActivity extends BaseActivity implements View.OnClickListe
                         switch (item.getItemId()) {
                             case R.id.mniChoosePhoto:
                                 requestPermissions(MyConst.REQCD_ACCESS_GALLERY);
-                                takePhotoFromGallery();
                                 break;
                             case R.id.mniTakePhoto:
                                 requestPermissions(MyConst.REQCD_ACCESS_CAMERA);
-                                takePhotoFromCamera();
                                 break;
                         }
                         return true;
@@ -251,7 +250,7 @@ public class EditDiaryActivity extends BaseActivity implements View.OnClickListe
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
         tvDiaryTime.setText(MyDate.timestampToTime(calendar.getTimeInMillis()));
-        diaryTime = MyDate.timestampToDateTime(calendar.getTimeInMillis());
+        diaryTime = MyDate.timestampToTime(calendar.getTimeInMillis());
     }
 
     @Override
@@ -277,6 +276,21 @@ public class EditDiaryActivity extends BaseActivity implements View.OnClickListe
                 Log.d(TAG, "onActivityResult: img-path=" + getImgPath());
                 diary.setImgUri(getImgPath());
                 ivDiaryImg.setImageURI(Uri.parse(getImgPath()));
+                break;
+        }
+    }
+    @Override
+    protected void postRequestPermissionsResult(int reqCd, boolean result) {
+        if (!result) {
+            Snackbar.make(btnEditDiary, R.string.permission_not_granted, Snackbar.LENGTH_LONG).show();
+            return;
+        }
+        switch (reqCd) {
+            case MyConst.REQCD_ACCESS_CAMERA:
+                takePhotoFromCamera();
+                break;
+            case MyConst.REQCD_ACCESS_GALLERY:
+                takePhotoFromGallery();
                 break;
         }
     }

@@ -187,7 +187,7 @@ public class EditExpenseActivity extends BaseActivity implements View.OnClickLis
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
         tvExpenseTime.setText(MyDate.timestampToTime(calendar.getTimeInMillis()));
-        expenseTime = MyDate.timestampToDateTime(calendar.getTimeInMillis());
+        expenseTime = MyDate.timestampToTime(calendar.getTimeInMillis());
     }
     private void validate() {
         String title = etExpenseTitle.getText().toString();

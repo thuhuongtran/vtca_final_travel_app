@@ -171,7 +171,7 @@ public class EditPlanActivity extends BaseActivity implements View.OnClickListen
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
         tvPlanTime.setText(MyDate.timestampToTime(calendar.getTimeInMillis()));
-        planTime = MyDate.timestampToDateTime(calendar.getTimeInMillis());
+        planTime = MyDate.timestampToTime(calendar.getTimeInMillis());
     }
 
     private void validate() {

@@ -11,6 +11,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.vtcac.thuhuong.mytrips.MainActivity;
 import com.vtcac.thuhuong.mytrips.R;
@@ -124,17 +125,30 @@ public class TravelDetailActivity extends BaseActivity implements View.OnClickLi
                         switch (item.getItemId()) {
                             case R.id.mniTakePhoto:
                                 requestPermissions(MyConst.REQCD_ACCESS_CAMERA);
-                                takePhotoFromCamera();
                                 break;
                             case R.id.mniChoosePhoto:
                                 requestPermissions(MyConst.REQCD_ACCESS_GALLERY);
-                                takePhotoFromGallery();
                                 break;
                         }
                         return true;
                     }
                 });
                 popupMenu.show();
+                break;
+        }
+    }
+    @Override
+    protected void postRequestPermissionsResult(int reqCd, boolean result) {
+        if (!result) {
+            Snackbar.make(fab, R.string.permission_not_granted, Snackbar.LENGTH_LONG).show();
+            return;
+        }
+        switch (reqCd) {
+            case MyConst.REQCD_ACCESS_CAMERA:
+                takePhotoFromCamera();
+                break;
+            case MyConst.REQCD_ACCESS_GALLERY:
+                takePhotoFromGallery();
                 break;
         }
     }

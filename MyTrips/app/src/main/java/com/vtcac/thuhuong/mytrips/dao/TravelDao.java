@@ -24,7 +24,7 @@ public interface TravelDao {
     @Query("SELECT * FROM travel ORDER BY endDt DESC")
     LiveData<List<Travel>> getAllTravelsByEndDesc();
 
-    @Query("SELECT * FROM travel WHERE placeName LIKE :placeName")
+    @Query("SELECT * FROM travel WHERE title LIKE :placeName")
     LiveData<List<Travel>> getAllTravelsByTypingCity(String placeName);
 
     @Query("SELECT * FROM travel ORDER BY title ASC")

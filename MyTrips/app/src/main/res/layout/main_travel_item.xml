@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_list_item_88"
+    android:layout_height="@dimen/height_list_item_92"
     android:background="@drawable/bg_view_onclick"
     android:orientation="horizontal">
 
@@ -21,7 +21,7 @@
         android:id="@+id/rlText"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginVertical="@dimen/margin_vertical_list_item"
+        android:paddingVertical="@dimen/margin_vertical_list_item"
         app:layout_constraintEnd_toStartOf="@id/ivMenu"
         app:layout_constraintStart_toEndOf="@id/ivTravelImg"
         app:layout_constraintTop_toTopOf="parent">
@@ -58,6 +58,8 @@
             android:layout_below="@id/tvTravelPlaceAddr"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
             android:paddingLeft="@dimen/padding_left_list_item_text"
             android:paddingRight="@dimen/margin_normal_8"
             android:singleLine="true"
